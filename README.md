@@ -21,7 +21,7 @@ Interactive component. When using a device without a touchscreen, the buttons wi
 
 3. **SETTINGS**
 
-Various settings are dispayed when selecting the hamburger button, such as maximum radius.
+Various settings are shown when selecting the hamburger button, such as maximum radius.
 
 ## Decision flow
 
@@ -36,8 +36,10 @@ Various settings are dispayed when selecting the hamburger button, such as maxim
 
 ## Meta
 
-CPSC 351-01 Fall 19
+CPSC 362-01 Fall 19
+
 Brendon Linthurst
+
 Shane Spangenberg
 
 ![Decisions](Documentation/angrydecide.png)
