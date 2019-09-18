@@ -1,0 +1,72 @@
+@font-face {
+    font-family: "BebasNeue-Regular";
+    src: url(BebasNeue-Regular.tff);
+}
+
+#header{
+    text-align: center;
+    color: #d05c33;
+    text-shadow: 1.5px 1.5px 1.5px black;
+    font-size: 72px;
+    font-family: BebasNeue-Regular;
+}
+
+body {
+    background-color: white;
+}
+
+.flex-container{
+    display: flex;
+    justify-content: space-around;
+    background-color: lightblue;
+}
+
+.overlay {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: rgb(243, 171, 62);
+    overflow-x: hidden;
+    transition: 0.5s;
+  }
+  
+  .overlay-content {
+    position: relative;
+    top: 25%;
+    width: 100%;
+    text-align: center;
+    margin-top: 30px;
+  }
+  
+  .overlay a {
+    padding: 8px;
+    text-decoration: none;
+    font-size: 36px;
+    color: coral;
+    display: block;
+    transition: 0.3s;
+    text-shadow: 1px 1px 1px black;
+  }
+  
+  .overlay a:hover, .overlay a:focus {
+    color: #f1f1f1;
+  }
+  
+  .overlay .closebtn {
+    position: absolute;
+    top: 20px;
+    right: 45px;
+    font-size: 60px;
+  }
+  
+  @media screen and (max-height: 450px) {
+    .overlay a {font-size: 20px}
+    .overlay .closebtn {
+    font-size: 40px;
+    top: 15px;
+    right: 35px;
+    }
+  }
