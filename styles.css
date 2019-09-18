@@ -1,13 +1,13 @@
 @font-face {
     font-family: "BebasNeue-Regular";
-    src: url(BebasNeue-Regular.tff);
+    src: url(Assets/BebasNeue-Regular.ttf);
 }
 
 #header{
     text-align: center;
     color: #d05c33;
-    text-shadow: 1.5px 1.5px 1.5px black;
-    font-size: 72px;
+    text-shadow: 3px 3px 3px black;
+    font-size: 108px;
     font-family: BebasNeue-Regular;
 }
 
@@ -19,6 +19,7 @@ body {
     display: flex;
     justify-content: space-around;
     background-color: lightblue;
+    top: 0;
 }
 
 .overlay {
