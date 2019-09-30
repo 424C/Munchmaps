@@ -8,6 +8,7 @@
 <script>
 import FoodCard from './components/FoodCard'
 import Header from './components/layout/Header'
+import '../dist/style.css' 
 
 export default {
   name: 'app',

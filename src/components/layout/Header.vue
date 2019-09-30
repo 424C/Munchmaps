@@ -1,7 +1,9 @@
 <template>
-    <header class="header">
-        <h1>Munchmaps</h1>
-    </header>
+    <div class="flex flex-row justify-between px-16">
+        <button class="shadow-lg">Button</button>
+        <h1 class='text-6xl text-orange-700' style="text-shadow:1px 1px black;">Munchmaps</h1>
+        <img src="./burgerLogo.png" alt="BurgerLogo" style="height: 100px; width: 100px;">
+    </div>
 </template>
 
 <script>
@@ -11,10 +13,13 @@ export default {
 </script>
 
 <style scoped>
-    .header {
-        background: lightblue;
-        color: orange;
-        text-align: center;
-        font-size: 48px;
-    }
+/* Adding External Font For Header */
+@font-face {
+        font-family: "BebasNeue";
+        src: url("./BebasNeue-Regular.ttf");
+}
+
+*{
+    font-family: "BebasNeue";
+}
 </style>
