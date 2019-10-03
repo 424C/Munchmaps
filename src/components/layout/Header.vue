@@ -2,12 +2,34 @@
     <div>
 
     <div class="flex flex-row justify-between px-16">
-        <Slide width="200">
-            <div>
-            <h1 class="text-3xl">Distance</h1>
-            <input type="radio" name="distance" value="5miles">5 Miles
+        <Slide disableOutsideClick width="175">
+            <div class="block items-center">
+            <h1 class="text-4xl items-center mr-8">Distance</h1>
+            <div class="mt-4">
+                <div>
+                    <ul>
+                        <label class="inline flex items-center">
+                        <li><input type="radio" name="distance" class="form-radio" value="1" checked>
+                        <span class="ml-3">5 Miles</span>
+                        </li>
+                        </label><br>
+                        <label class="inline flex items-center">
+                        <li><input type="radio" name="distance" class="form-radio" value="2">
+                        <span class="ml-2">10 Miles</span>
+                        </li></label><br>
+                        <label class="inline flex items-center">
+                        <li><input type="radio" name="distance" class="form-radio" value="3">
+                        <span class="ml-2">15 Miles</span>
+                        </li></label><br>
+                        <label class="inline flex items-center">
+                        <li><input type="radio" name="distance" class="form-radio" value="4">
+                        <span class="ml-2">20 Miles</span>
+                        </li>
+                        </label>
+                    </ul>
+                </div>
             </div>
-            
+            </div>
         </Slide>
         <h1 class='text-6xl text-orange-700' style="text-shadow:1px 1px black;">Munchmaps</h1>
         <img src="./burgerLogo.png" alt="BurgerLogo" style="height: 100px; width: 100px;">
@@ -28,16 +50,37 @@ export default {
     }
 }
 
+
 </script>
 
-<style scoped>
+<style>
 /* Adding External Font For Header */
-@font-face {
-        font-family: "BebasNeue";
-        src: url("./BebasNeue-Regular.ttf");
-}
+    @font-face {
+            font-family: "BebasNeue";
+            src: url("./BebasNeue-Regular.ttf");
+    }
 
-*{
-    font-family: "BebasNeue";
-}
+    *{
+        font-family: "BebasNeue";
+    }
+
+    .bm-burger-bars {
+      background-color:rgb(189, 80, 7);
+      box-shadow: 1px 1px 1px black;
+    }
+
+    .bm-burger-button {
+        position: fixed;
+        width: 62px;
+        height: 62px;
+        left: 36px;
+        top: 68px;
+        cursor: pointer;
+        }
+
+        .bm-overlay {
+      background: rgba(255, 255, 255, 0);
+    }
+
+
 </style>
