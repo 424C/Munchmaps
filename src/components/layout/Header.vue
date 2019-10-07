@@ -1,6 +1,5 @@
 <template>
     <div>
-
     <div class="flex flex-row justify-between px-16">
         <Slide disableOutsideClick width="175">
             <div class="block items-center">
@@ -10,22 +9,27 @@
                     <ul>
                         <label class="inline flex items-center">
                         <li><input type="radio" name="distance" class="form-radio" value="1" checked>
-                        <span class="ml-3">5 Miles</span>
+                        <span class="ml-2">4 Blocks</span>
                         </li>
                         </label><br>
                         <label class="inline flex items-center">
                         <li><input type="radio" name="distance" class="form-radio" value="2">
-                        <span class="ml-2">10 Miles</span>
+                        <span class="ml-2">1 Mile</span>
                         </li></label><br>
                         <label class="inline flex items-center">
                         <li><input type="radio" name="distance" class="form-radio" value="3">
-                        <span class="ml-2">15 Miles</span>
+                        <span class="ml-2">2 Miles</span>
                         </li></label><br>
                         <label class="inline flex items-center">
                         <li><input type="radio" name="distance" class="form-radio" value="4">
-                        <span class="ml-2">20 Miles</span>
+                        <span class="ml-2">5 Miles</span>
                         </li>
-                        </label>
+                        </label><br>
+                        <label class="inline flex items-center">
+                        <li><input type="radio" name="distance" class="form-radio" value="4">
+                        <span class="ml-2">10 Miles</span>
+                        </li>
+                        </label><br>
                     </ul>
                 </div>
             </div>
@@ -81,6 +85,5 @@ export default {
         .bm-overlay {
       background: rgba(255, 255, 255, 0);
     }
-
 
 </style>
