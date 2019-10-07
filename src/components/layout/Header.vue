@@ -1,6 +1,6 @@
 <template>
     <div>
-    <div class="flex flex-row justify-between px-16">
+    <div class="flex flex-row justify-between px-16 items-center">
         <Slide disableOutsideClick width="175">
             <div class="block items-center">
             <h1 class="text-4xl items-center mr-8">Distance</h1>
@@ -35,7 +35,7 @@
             </div>
             </div>
         </Slide>
-        <h1 class='text-6xl text-orange-700' style="text-shadow:1px 1px black;">Munchmaps</h1>
+        <h1 id="center" class='text-6xl ml-8 text-orange-700' style="text-shadow:1px 1px black;">Munchmaps</h1>
         <img src="./burgerLogo.png" alt="BurgerLogo" style="height: 100px; width: 100px;">
     </div>
     </div>
@@ -84,6 +84,10 @@ export default {
 
         .bm-overlay {
       background: rgba(255, 255, 255, 0);
+    }
+
+    #center{
+        margin-left: 1.5em;
     }
 
 </style>
