@@ -1,22 +1,34 @@
 <template>
   <section class="container">
-    <div>
-        <Vue2InteractDraggable
-          v-for="(card, index) in cards"
-          :key="index"
-          :interact-out-of-sight-x-coordinate="500"
-          :interact-max-rotation="15"
-          :interact-x-threshold="200"
-          :interact-y-threshold="200"
-          @draggedRight="right"
-          class="rounded-borders card fixed fixed--center"
-          :class="{
-            'card--top': index === 0
-          }">
-          <div class="flex flex--center" style="height: 100%">
-            <h1>{{card.text}}</h1>
-          </div>
+    <div class="fixed fixed--center" style="z-index: 3">
+      <Vue2InteractDraggable
+        v-if="isVisible"
+        :interact-out-of-sight-x-coordinate="500"
+        :interact-max-rotation="15"
+        :interact-x-threshold="200"
+        :interact-y-threshold="200"
+        @draggedRight="right"
+        class="rounded-borders card card--one">
+        <div class="flex flex--center" style="height: 100%">
+          <h1>{{current.text}}</h1>
+        </div>
       </Vue2InteractDraggable>
+    </div>
+    <div
+      v-if="next"
+      class="rounded-borders card card--two fixed fixed--center"
+      style="z-index: 2">
+      <div class="flex flex--center" style="height: 100%">
+        <h1>{{next.text}}</h1>
+      </div>
+    </div>
+    <div
+      v-if="index + 2 < cards.length"
+      class="rounded-borders card card--three fixed fixed--center"
+      style="z-index: 1">
+      <div class="flex flex--center" style="height: 100%">
+        <h1>test</h1>
+      </div>
     </div>
   </section>
 </template>
@@ -28,6 +40,8 @@ export default {
   components: { Vue2InteractDraggable },
   data() {
     return {
+      isVisible: true,
+      index: 0,
       cards: [
         { text: 'one' },
         { text: 'two' },
@@ -35,9 +49,21 @@ export default {
       ]
     }
   },
+  computed: {
+    current() {
+      return this.cards[this.index]
+    },
+    next() {
+      return this.cards[this.index + 1]
+    }
+  },
   methods: {
     right() {
-      setTimeout(() => this.cards.shift(), 300);
+      setTimeout(() => this.isVisible = false, 200)
+      setTimeout(() => {
+        this.index++
+        this.isVisible = true
+      }, 300)
     }
   }
 }
@@ -45,7 +71,7 @@ export default {
 
 <style lang="scss" scoped>
 .container {
-  background: #eceff1;
+  background:white;
   width: 100%;
   height: 100vh;
 }
@@ -54,6 +80,7 @@ export default {
   display: flex;
   &--center {
     align-items: center;
+    justify-items: center;
     justify-content: center;
   }
 }
@@ -67,28 +94,27 @@ export default {
   }
 }
 .rounded-borders {
-  border-radius: 2rem
+  border-radius: 12px;
 }
 .card {
-  pointer-events: none;
   width: 300px;
   height: 400px;
-  &:nth-child(1) {
-    background: pink;
-    z-index: 3;
+  color: white;
+  &--one {
+    background-image: url('../assets/salmon-sushi.jpg')
+    // background-color: pink;
   }
-  &:nth-child(2) {
-    z-index: 2;
-    background: red;
-    top: 52%;
+  &--two {
+    background-image: url('../assets/hamburger.jpg');
+    // background-color: red;
+    width: 280px;
+    top: 51%;
   }
-  &:nth-child(3) {
-    z-index: 1;
-    background: green;
-    top: 54%;
-  }
-  &--top {
-    pointer-events: auto !important;
+  &--three {
+    // background-color: orange;
+    background-image: url('../assets/ramen.jpg');
+    width: 260px;
+    top: 51.8%;
   }
 }
 </style>
