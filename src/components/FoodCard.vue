@@ -1,16 +1,27 @@
 <template>
   <section class="container">
-    <div class="fixed fixed--center" style="z-index: 3">
+    <div
+      v-if="current"
+      class="fixed fixed--center"
+      style="z-index: 3"
+      :class="{ 'transition': isVisible }">
+
       <Vue2InteractDraggable
         v-if="isVisible"
         :interact-out-of-sight-x-coordinate="500"
         :interact-max-rotation="15"
         :interact-x-threshold="200"
         :interact-y-threshold="200"
+
         @draggedRight="right"
         class="rounded-borders card card--one">
-        <div class="flex flex--center" style="height: 100%">
-          <h1>{{current.text}}</h1>
+
+        <div style="height: 100%">
+          <img :src="require(`../assets/${current.src}`)" class ="rounded-borders"/>
+
+          <div class="text">
+            <h2>{{current.name}}</h2>
+          </div>
         </div>
       </Vue2InteractDraggable>
     </div>
@@ -18,10 +29,15 @@
       v-if="next"
       class="rounded-borders card card--two fixed fixed--center"
       style="z-index: 2">
-      <div class="flex flex--center" style="height: 100%">
-        <h1>{{next.text}}</h1>
+      <div style="height: 100%">
+        <img :src="require(`../assets/${current.src}`)" class ="rounded-borders"/>
+        <div class="text">
+          <h2>{{next.name}}</h2>
+        </div>
       </div>
     </div>
+
+    <!--hidden cards beneath-->
     <div
       v-if="index + 2 < cards.length"
       class="rounded-borders card card--three fixed fixed--center"
@@ -32,8 +48,18 @@
     </div>
   </section>
 </template>
+
+
+//SCRIPT
+
+
 <script>
-import { Vue2InteractDraggable } from 'vue2-interact'
+import { Vue2InteractDraggable, InteractEventBus } from 'vue2-interact'
+
+// const EVENTS = {
+//   ACCEPT: 'accept',
+//   REJECT: 'reject'
+// }
 
 export default {
   name: 'SwipeableCards',
@@ -43,9 +69,11 @@ export default {
       isVisible: true,
       index: 0,
       cards: [
-        { text: 'one' },
-        { text: 'two' },
-        { text: 'three' },
+        //we will need to redirect the yelp image url to the src variables
+        //and populate the name field
+        { src: 'ramen.jpg', name: 'Ramen'},
+        { src: 'hamburger.jpg', name: 'Cheeseburger'},
+        { src: 'salmon-sushi.jpg', name: 'Sushi'}
       ]
     }
   },
@@ -69,6 +97,8 @@ export default {
 }
 </script>
 
+//START CSS
+
 <style lang="scss" scoped>
 .container {
   background:white;
@@ -79,6 +109,7 @@ export default {
 .flex {
   display: flex;
   &--center {
+    margin-top: 35px;
     align-items: center;
     justify-items: center;
     justify-content: center;
@@ -100,21 +131,31 @@ export default {
   width: 300px;
   height: 400px;
   color: white;
+
+  img {
+    object-fit: cover;
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
   &--one {
-    background-image: url('../assets/salmon-sushi.jpg')
-    // background-color: pink;
+    box-shadow: 0 1px 3px black;
   }
   &--two {
-    background-image: url('../assets/hamburger.jpg');
-    // background-color: red;
-    width: 280px;
-    top: 51%;
+    box-shadow: 0 10px 15px black;
   }
   &--three {
-    // background-color: orange;
-    background-image: url('../assets/ramen.jpg');
-    width: 260px;
-    top: 51.8%;
+    box-shadow: 0 20px 30px black;
+  }
+
+  .text {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background: black;
+  }
+  span {
+    font-weight: bold;
   }
 }
 </style>
