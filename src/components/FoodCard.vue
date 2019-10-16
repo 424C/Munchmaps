@@ -55,7 +55,7 @@
 
 <script>
 import { Vue2InteractDraggable, InteractEventBus } from 'vue2-interact'
-
+import axios from "axios";
 // const EVENTS = {
 //   ACCEPT: 'accept',
 //   REJECT: 'reject'
@@ -76,6 +76,24 @@ export default {
         { src: 'salmon-sushi.jpg', name: 'Sushi'}
       ]
     }
+  },
+  mounted(){
+    axios.get(`${'https://cors-anywhere.herokuapp.com/'}https://api.yelp.com/v3/businesses/search`, {
+      headers: {
+        Authorization: 'Bearer uK5jXy6Dqs7d0YzLK_2tV0DT1bQK5Q-PihFW13vzdmQ7cU4gIkXBuzhtMpyEPhq3d7kLo-RhCw_Kx4GiEMHQDB7ZrbCy3EQP5zZW_HDNkQ6O1n0E_U6CJMXUUtykXXYx'
+      },
+      params:{
+        term: 'restaurants',
+        location: 92869,
+        distance: 1600
+      }
+    })
+    .then((response) => {
+      console.log(response.data)
+    })
+    .catch((error) => {
+      console.log ('Error')
+    })
   },
   computed: {
     current() {
