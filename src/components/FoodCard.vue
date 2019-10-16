@@ -3,8 +3,7 @@
     <div
       v-if="current"
       class="fixed fixed--center"
-      style="z-index: 3"
-      :class="{ 'transition': isVisible }">
+      style="z-index: 3">
 
       <Vue2InteractDraggable
         v-if="isVisible"
@@ -14,6 +13,7 @@
         :interact-y-threshold="200"
 
         @draggedRight="right"
+        @draggedLeft="left"
         class="rounded-borders card card--one">
 
         <div style="height: 100%">
@@ -30,7 +30,7 @@
       class="rounded-borders card card--two fixed fixed--center"
       style="z-index: 2">
       <div style="height: 100%">
-        <img :src="require(`../assets/${current.src}`)" class ="rounded-borders"/>
+        <img :src="require(`../assets/${next.src}`)" class ="rounded-borders"/>
         <div class="text">
           <h2>{{next.name}}</h2>
         </div>
@@ -87,6 +87,14 @@ export default {
   },
   methods: {
     right() {
+      setTimeout(() => this.isVisible = false, 200)
+      setTimeout(() => {
+        this.index++
+        this.isVisible = true
+      }, 300)
+    },
+
+    left() {
       setTimeout(() => this.isVisible = false, 200)
       setTimeout(() => {
         this.index++
@@ -152,10 +160,11 @@ export default {
     position: absolute;
     bottom: 0;
     width: 100%;
-    background: black;
-  }
-  span {
-    font-weight: bold;
+    background: white;
+    color: black;
+    span {
+      font-weight: bolder;
+    }
   }
 }
 </style>
