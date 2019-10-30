@@ -17,8 +17,8 @@
         class="rounded-borders card card--one">
 
         <div style="height: 100%">
-          <img :src="require(`../assets/${current.src}`)" class ="rounded-borders"/>
-
+          <!-- <img :src="current.src" class ="rounded-borders"/> -->
+          <img v-bind:src="current.image_url" class="rounded-borders"/>
           <div class="text">
             <h2>{{current.name}}</h2>
           </div>
@@ -30,7 +30,8 @@
       class="rounded-borders card card--two fixed fixed--center"
       style="z-index: 2">
       <div style="height: 100%">
-        <img :src="require(`../assets/${next.src}`)" class ="rounded-borders"/>
+        <!-- <img :src="require(`../assets/${next.src}`)" class ="rounded-borders"/> -->
+        <img v-bind:src="next.image_url" class="rounded-borders"/>
         <div class="text">
           <h2>{{next.name}}</h2>
         </div>
@@ -66,19 +67,20 @@ export default {
   components: { Vue2InteractDraggable },
   data() {
     return {
+      myJson: [],
       isVisible: true,
       index: 0,
       cards: [
         //we will need to redirect the yelp image url to the src variables
         //and populate the name field
-        { src: 'ramen.jpg', name: 'Ramen'},
-        { src: 'hamburger.jpg', name: 'Cheeseburger'},
+        { src: 'hamburger.jpg', name: 'hamburger'},
+        { src: 'ramen.jpg', name: 'ramen'},
         { src: 'salmon-sushi.jpg', name: 'Sushi'}
       ]
     }
   },
   mounted(){
-    axios.get(`${'https://cors-anywhere.herokuapp.com/'}https://api.yelp.com/v3/businesses/search`, {
+      axios.get(`${'https://cors-anywhere.herokuapp.com/'}https://api.yelp.com/v3/businesses/search`, {
       headers: {
         Authorization: 'Bearer uK5jXy6Dqs7d0YzLK_2tV0DT1bQK5Q-PihFW13vzdmQ7cU4gIkXBuzhtMpyEPhq3d7kLo-RhCw_Kx4GiEMHQDB7ZrbCy3EQP5zZW_HDNkQ6O1n0E_U6CJMXUUtykXXYx'
       },
@@ -89,7 +91,7 @@ export default {
       }
     })
     .then((response) => {
-      console.log(response.data)
+      this.myJson = response.data;
     })
     .catch((error) => {
       console.log ('Error')
@@ -97,10 +99,10 @@ export default {
   },
   computed: {
     current() {
-      return this.cards[this.index]
+      return this.myJson.businesses[this.index]
     },
     next() {
-      return this.cards[this.index + 1]
+      return this.myJson.businesses[this.index + 1]
     }
   },
   methods: {
