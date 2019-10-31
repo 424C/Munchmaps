@@ -1,9 +1,13 @@
 <template>
   <section class="container">
+    <section v-if="loading">
+        <h1>Loading...</h1>
+      </section>
     <div
       v-if="current"
       class="fixed fixed--center"
       style="z-index: 3">
+
 
       <Vue2InteractDraggable
         v-if="isVisible"
@@ -17,7 +21,6 @@
         class="rounded-borders card card--one">
 
         <div style="height: 100%">
-          <!-- <img :src="current.src" class ="rounded-borders"/> -->
           <img v-bind:src="current.image_url" class="rounded-borders"/>
           <div class="text">
             <h2>{{current.name}}</h2>
@@ -30,7 +33,6 @@
       class="rounded-borders card card--two fixed fixed--center"
       style="z-index: 2">
       <div style="height: 100%">
-        <!-- <img :src="require(`../assets/${next.src}`)" class ="rounded-borders"/> -->
         <img v-bind:src="next.image_url" class="rounded-borders"/>
         <div class="text">
           <h2>{{next.name}}</h2>
@@ -39,14 +41,14 @@
     </div>
 
     <!--hidden cards beneath-->
-    <div
+    <!-- <div
       v-if="index + 2 < cards.length"
       class="rounded-borders card card--three fixed fixed--center"
       style="z-index: 1">
       <div class="flex flex--center" style="height: 100%">
         <h1>test</h1>
       </div>
-    </div>
+    </div> -->
   </section>
 </template>
 
@@ -68,15 +70,17 @@ export default {
   data() {
     return {
       myJson: [],
+      loading: true,
+      errored: true,
       isVisible: true,
       index: 0,
-      cards: [
+     /* cards: [
         //we will need to redirect the yelp image url to the src variables
         //and populate the name field
         { src: 'hamburger.jpg', name: 'hamburger'},
         { src: 'ramen.jpg', name: 'ramen'},
         { src: 'salmon-sushi.jpg', name: 'Sushi'}
-      ]
+      ]*/
     }
   },
   mounted(){
@@ -94,8 +98,9 @@ export default {
       this.myJson = response.data;
     })
     .catch((error) => {
-      console.log ('Error')
+      console.log (error)
     })
+    .finally(() => this.loading = false)
   },
   computed: {
     current() {
@@ -113,7 +118,6 @@ export default {
         this.isVisible = true
       }, 300)
     },
-
     left() {
       setTimeout(() => this.isVisible = false, 200)
       setTimeout(() => {
