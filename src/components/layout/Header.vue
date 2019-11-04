@@ -36,7 +36,7 @@
             </div>
         </Slide>
         <h1 id="center" class='text-6xl ml-8 text-orange-700' style="text-shadow:1px 1px black;">Munchmaps</h1>
-        <img src="./burgerLogo.png" alt="BurgerLogo" style="height: 100px; width: 100px;">
+        <img :src="require('./burgerLogo.png')" alt="BurgerLogo" style="height: 100px; width: 100px;"/>
     </div>
     </div>
 </template>

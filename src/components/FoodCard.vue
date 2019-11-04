@@ -1,8 +1,7 @@
 <template>
   <section class="container">
-    <section v-if="loading">
-        <h1>Loading...</h1>
-      </section>
+    <img v-bind:src="require('../assets/loading.gif')" v-if='loading' class="fixed fixed--center"/>
+    <div v-else>
     <div
       v-if="current"
       class="fixed fixed--center"
@@ -24,6 +23,7 @@
           <img v-bind:src="current.image_url" class="rounded-borders"/>
           <div class="text">
             <h2>{{current.name}}</h2>
+            
           </div>
         </div>
       </Vue2InteractDraggable>
@@ -39,7 +39,7 @@
         </div>
       </div>
     </div>
-
+    </div>
     <!--hidden cards beneath-->
     <!-- <div
       v-if="index + 2 < cards.length"
@@ -84,7 +84,7 @@ export default {
       params:{
         term: 'restaurants',
         location: 92869,
-        distance: 1600
+        distance: 1600,
       }
     })
     .then((response) => {
@@ -117,7 +117,7 @@ export default {
         this.index++
         this.isVisible = true
       }, 300)
-    }
+    },
   }
 }
 </script>
