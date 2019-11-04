@@ -73,20 +73,13 @@ export default {
       loading: true,
       errored: true,
       isVisible: true,
-      index: 0,
-     /* cards: [
-        //we will need to redirect the yelp image url to the src variables
-        //and populate the name field
-        { src: 'hamburger.jpg', name: 'hamburger'},
-        { src: 'ramen.jpg', name: 'ramen'},
-        { src: 'salmon-sushi.jpg', name: 'Sushi'}
-      ]*/
+      index: 0
     }
   },
   mounted(){
       axios.get(`${'https://cors-anywhere.herokuapp.com/'}https://api.yelp.com/v3/businesses/search`, {
       headers: {
-        Authorization: 'Bearer uK5jXy6Dqs7d0YzLK_2tV0DT1bQK5Q-PihFW13vzdmQ7cU4gIkXBuzhtMpyEPhq3d7kLo-RhCw_Kx4GiEMHQDB7ZrbCy3EQP5zZW_HDNkQ6O1n0E_U6CJMXUUtykXXYx'
+        Authorization: process.env.VUE_APP_YELP_KEY,
       },
       params:{
         term: 'restaurants',
