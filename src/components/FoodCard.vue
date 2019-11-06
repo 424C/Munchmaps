@@ -22,7 +22,8 @@
         <div style="height: 100%">
           <img v-bind:src="current.image_url" class="rounded-borders"/>
           <div class="text">
-            <h2>{{current.name}}</h2>
+            <h2 class="text-3xl">{{current.name}}</h2>
+            <i>Distance: {{current.distance/1610}} (mi)</i>
             
           </div>
         </div>
@@ -35,7 +36,8 @@
       <div style="height: 100%">
         <img v-bind:src="next.image_url" class="rounded-borders"/>
         <div class="text">
-          <h2>{{next.name}}</h2>
+          <h2 class="text-3xl">{{next.name}}</h2>
+          <i>Distance: {{next.distance/1610}} (mi)</i>
         </div>
       </div>
     </div>
@@ -83,7 +85,7 @@ export default {
       },
       params:{
         term: 'restaurants',
-        location: 92869,
+        location: 92831,
         distance: 1600,
       }
     })
