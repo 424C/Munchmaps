@@ -23,7 +23,7 @@
           <img v-bind:src="current.image_url" class="rounded-borders"/>
           <div class="text">
             <h2 class="text-3xl">{{current.name}}</h2>
-            <i>Distance: {{current.distance/1610}} (mi)</i>
+            <i class="text-xl">Distance: {{(current.distance/1609).toFixed(2)}} (mi)</i>
             
           </div>
         </div>
@@ -37,7 +37,7 @@
         <img v-bind:src="next.image_url" class="rounded-borders"/>
         <div class="text">
           <h2 class="text-3xl">{{next.name}}</h2>
-          <i>Distance: {{next.distance/1610}} (mi)</i>
+          <i class="text-xl">Distance: {{(next.distance/1609).toFixed(2)}} (mi)</i>
         </div>
       </div>
     </div>
@@ -75,7 +75,7 @@ export default {
       loading: true,
       errored: true,
       isVisible: true,
-      index: 0
+      index: 0,
     }
   },
   mounted(){
@@ -93,7 +93,7 @@ export default {
       this.myJson = response.data;
     })
     .catch((error) => {
-      console.log (error)
+      console.log(error)
     })
     .finally(() => this.loading = false)
   },
@@ -103,7 +103,7 @@ export default {
     },
     next() {
       return this.myJson.businesses[this.index + 1]
-    }
+    },
   },
   methods: {
     right() {
