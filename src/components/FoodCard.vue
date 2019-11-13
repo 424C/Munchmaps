@@ -70,6 +70,7 @@ export default {
         term: 'restaurants',
         location: 92831,
         distance: 1600,
+        offset: Math.floor(Math.random() * 300) // psuedo random retrieval from yelp. Selects from a list of resstaurants at a specified index
       }
     })
     .then((response) => {
