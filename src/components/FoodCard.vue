@@ -42,29 +42,12 @@
       </div>
     </div>
     </div>
-    <!--hidden cards beneath-->
-    <!-- <div
-      v-if="index + 2 < cards.length"
-      class="rounded-borders card card--three fixed fixed--center"
-      style="z-index: 1">
-      <div class="flex flex--center" style="height: 100%">
-        <h1>test</h1>
-      </div>
-    </div> -->
   </section>
 </template>
-
-
-//SCRIPT
-
 
 <script>
 import { Vue2InteractDraggable, InteractEventBus } from 'vue2-interact'
 import axios from "axios";
-// const EVENTS = {
-//   ACCEPT: 'accept',
-//   REJECT: 'reject'
-// }
 
 export default {
   name: 'SwipeableCards',
@@ -97,6 +80,7 @@ export default {
     })
     .finally(() => this.loading = false)
   },
+
   computed: {
     current() {
       return this.myJson.businesses[this.index]
@@ -105,6 +89,7 @@ export default {
       return this.myJson.businesses[this.index + 1]
     },
   },
+
   methods: {
     right() {
       setTimeout(() => this.isVisible = false, 200)
@@ -123,8 +108,6 @@ export default {
   }
 }
 </script>
-
-//START CSS
 
 <style lang="scss" scoped>
 .container {
@@ -154,6 +137,7 @@ export default {
 .rounded-borders {
   border-radius: 12px;
 }
+
 .card {
   width: 300px;
   height: 400px;
