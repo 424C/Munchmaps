@@ -1,5 +1,14 @@
 <template>
   <section class="container">
+    <div v-if="errorStr">
+    Sorry, but the following error
+    occurred: {{errorStr}}
+  </div>
+  <div v-if="!isHidden">
+    <button v-on:click="callApi" class="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded">Let's Munch!</button>
+    <img v-bind:src="require('./layout/burgerLogo.png')" class="fixed fixed--center" style="height: 300px; width: 300px;"/>
+  </div>
+  <div v-else>
     <img v-bind:src="require('../assets/loading.gif')" v-if='loading' class="fixed fixed--center"/>
     <div v-else>
     <div
@@ -42,6 +51,7 @@
       </div>
     </div>
     </div>
+  </div>
   </section>
 </template>
 
@@ -59,16 +69,49 @@ export default {
       errored: true,
       isVisible: true,
       index: 0,
+      location: null,
+      gettingLocation: false,
+      errorStr: null,
+      isHidden: false,
     }
   },
-  mounted(){
+  created()
+  {
+    //do we support geolocation
+    if(!("geolocation" in navigator)) {
+      this.errorStr = 'Geolocation is not available.';
+      return;
+    }
+
+    this.gettingLocation = true;
+    // get position
+    navigator.geolocation.getCurrentPosition(pos => {
+      this.gettingLocation = false;
+      this.location = pos;
+    }, err => {
+      this.gettingLocation = false;
+      this.errorStr = err.message;
+    })
+  },
+  computed: {
+    current() {
+      return this.myJson.businesses[this.index]
+    },
+    next() {
+      return this.myJson.businesses[this.index + 1]
+    },
+  },
+  methods: {
+    callApi(){
+      this.isHidden = true;
       axios.get(`${'https://cors-anywhere.herokuapp.com/'}https://api.yelp.com/v3/businesses/search`, {
       headers: {
         Authorization: process.env.VUE_APP_YELP_KEY,
       },
       params:{
         term: 'restaurants',
-        location: 92831,
+        latitude: this.location.coords.latitude,
+        longitude: this.location.coords.longitude,
         distance: 1600,
         offset: Math.floor(Math.random() * 300) // psuedo random retrieval from yelp. Selects from a list of resstaurants at a specified index
       }
@@ -80,18 +123,7 @@ export default {
       console.log(error)
     })
     .finally(() => this.loading = false)
-  },
-
-  computed: {
-    current() {
-      return this.myJson.businesses[this.index]
     },
-    next() {
-      return this.myJson.businesses[this.index + 1]
-    },
-  },
-
-  methods: {
     right() {
       setTimeout(() => this.isVisible = false, 200)
       setTimeout(() => {
