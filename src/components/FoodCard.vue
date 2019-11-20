@@ -5,9 +5,11 @@
     occurred: {{errorStr}}
   </div>
   <div v-if="!isHidden">
-    <button v-on:click="callApi" class="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded">Let's Munch!</button>
+    <button v-on:click="callApi" class="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded fixed--center">Let's Munch!</button>
     <img v-bind:src="require('./layout/burgerLogo.png')" class="fixed fixed--center" style="height: 300px; width: 300px;"/>
+    <!-- <img v-bind:src="require('../assets/phone-gps.jpg')" class="fixed fixed--center" style="height: 400px; width: 200px;"/> -->
   </div>
+  
   <div v-else>
     <img v-bind:src="require('../assets/loading.gif')" v-if='loading' class="fixed fixed--center"/>
     <div v-else>
@@ -15,7 +17,6 @@
       v-if="current"
       class="fixed fixed--center"
       style="z-index: 3">
-
 
       <Vue2InteractDraggable
         v-if="isVisible"
@@ -33,7 +34,6 @@
           <div class="text">
             <h2 class="text-3xl">{{current.name}}</h2>
             <i class="text-xl">Distance: {{(current.distance/1609).toFixed(2)}} (mi)</i>
-            
           </div>
         </div>
       </Vue2InteractDraggable>
@@ -58,6 +58,8 @@
 <script>
 import { Vue2InteractDraggable, InteractEventBus } from 'vue2-interact'
 import axios from "axios";
+import { EventBus } from '../.././event-bus.js'
+
 
 export default {
   name: 'SwipeableCards',
@@ -73,6 +75,7 @@ export default {
       gettingLocation: false,
       errorStr: null,
       isHidden: false,
+      radius: 1609,
     }
   },
   created()
@@ -82,9 +85,6 @@ export default {
       this.errorStr = 'Geolocation is not available.';
       return;
     }
-
-    this.gettingLocation = true;
-    // get position
     navigator.geolocation.getCurrentPosition(pos => {
       this.gettingLocation = false;
       this.location = pos;
@@ -101,6 +101,11 @@ export default {
       return this.myJson.businesses[this.index + 1]
     },
   },
+  mounted(){
+    EventBus.$on('i-got-clicked', (msg) =>{
+      this.radius=msg;
+    })
+  },
   methods: {
     callApi(){
       this.isHidden = true;
@@ -112,8 +117,8 @@ export default {
         term: 'restaurants',
         latitude: this.location.coords.latitude,
         longitude: this.location.coords.longitude,
-        distance: 1600,
-        offset: Math.floor(Math.random() * 300) // psuedo random retrieval from yelp. Selects from a list of resstaurants at a specified index
+        radius: this.radius,
+     //   offset: Math.floor(Math.random() * 200) // psuedo random retrieval from yelp. Selects from a list of resstaurants at a specified index
       }
     })
     .then((response) => {
@@ -122,9 +127,15 @@ export default {
     .catch((error) => {
       console.log(error)
     })
-    .finally(() => this.loading = false)
+    .finally(() => {
+      this.loading = false})
     },
     right() {
+      var url = 'http://maps.google.com/?q=';
+      var strLatitude = (this.current.coordinates.latitude.toString());
+      var strLongitude = (this.current.coordinates.longitude.toString());
+      var address = (this.current.location.address1);
+      window.open(url+address, "_blank");
       setTimeout(() => this.isVisible = false, 200)
       setTimeout(() => {
         this.index++

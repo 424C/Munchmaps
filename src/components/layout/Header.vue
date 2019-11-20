@@ -8,25 +8,25 @@
                 <div>
                     <ul>
                         <label class="inline flex items-center">
-                        <li><input type="radio" name="distance" class="form-radio" value="1" checked>
+                        <li><input type="radio" v-on:change="emitGlobalClickEvent" name="distance" v-model="radius" class="form-radio" value="800">
                         <span class="ml-2">4 Blocks</span>
                         </li>
                         </label><br>
                         <label class="inline flex items-center">
-                        <li><input type="radio" name="distance" class="form-radio" value="2">
+                        <li><input type="radio" v-on:change="emitGlobalClickEvent" name="distance" v-model="radius" class="form-radio" value="1609">
                         <span class="ml-2">1 Mile</span>
                         </li></label><br>
                         <label class="inline flex items-center">
-                        <li><input type="radio" name="distance" class="form-radio" value="3">
+                        <li><input type="radio" v-on:change="emitGlobalClickEvent" name="distance" v-model="radius" class="form-radio" value="3200">
                         <span class="ml-2">2 Miles</span>
                         </li></label><br>
                         <label class="inline flex items-center">
-                        <li><input type="radio" name="distance" class="form-radio" value="4">
+                        <li><input type="radio" v-on:change="emitGlobalClickEvent" name="distance" v-model="radius" class="form-radio" value="8000">
                         <span class="ml-2">5 Miles</span>
                         </li>
                         </label><br>
                         <label class="inline flex items-center">
-                        <li><input type="radio" name="distance" class="form-radio" value="4">
+                        <li><input type="radio" v-on:change="emitGlobalClickEvent" name="distance" v-model="radius" class="form-radio" value="16000">
                         <span class="ml-2">10 Miles</span>
                         </li>
                         </label><br>
@@ -46,12 +46,24 @@
 <script>
 
 import { Slide } from 'vue-burger-menu'
+import { EventBus } from '../../../event-bus.js'
 
 export default {
-    name: "Header",
+    name: 'Header',
     components: {
         Slide
+    },
+    data(){
+        return{
+            radius: 1609
+        }  
+    },
+    methods: {
+        emitGlobalClickEvent(){
+            EventBus.$emit('i-got-clicked', this.radius);
+        }
     }
+    
 }
 
 
