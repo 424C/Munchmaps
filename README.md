@@ -1,5 +1,5 @@
 # Munchmaps
-A single page web application to connect hungry users with local restaurants. Munchmaps runs inside all modern browsers and is built using [Vue.js,](https://vuejs.org/), [Tailwind CSS](https://tailwindcss.com/), and [Node.js](https://nodejs.org/en/about/) technologies.
+A single page web application to connect hungry users with local restaurants. Munchmaps runs inside all modern browsers and is built using [Vue.js](https://vuejs.org/), [Tailwind CSS](https://tailwindcss.com/), and [Node.js](https://nodejs.org/en/about/) technologies.
 
 ## Purpose
 Deciding where to eat can be a frustrating and time consuming process. This phenomenon is commonly referred to as [paralysis by analysis](https://en.wikipedia.org/wiki/Analysis_paralysis). 
