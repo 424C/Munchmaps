@@ -1,6 +1,6 @@
 <template>
     <div>
-    <div class="flex flex-row justify-between px-16 items-center">
+    <div class="flex flex-row justify-between px-16 py-2 items-center">
         <Slide disableOutsideClick width="175">
             <div class="block items-center">
             <h1 class="text-4xl items-center mr-8">Distance</h1>
@@ -35,9 +35,13 @@
             </div>
             </div>
         </Slide>
-        <h1 id="center" class='text-6xl ml-8 text-orange-700' style="text-shadow:1px 1px black;">Munchmaps</h1>
+        <h1 id="center" class=' ml-8 text-orange-700' style="text-shadow:1px 1px black; font-size: 84px;">Munchmaps</h1>
         <img :src="require('./burgerLogo.png')" alt="BurgerLogo" style="height: 100px; width: 100px;"/>
     </div>
+    <div class="bg-gray-800" style="padding-top:.1rem; padding-bottom:.1rem;">
+        
+    </div>
+    <br>
     </div>
 </template>
 
@@ -86,18 +90,18 @@ export default {
     }
 
     .bm-burger-button {
-        position: fixed;
         width: 62px;
         height: 62px;
         left: 36px;
-        top: 68px;
+        top: 30px;
         cursor: pointer;
         }
 
         .bm-overlay {
       background: rgba(255, 255, 255, 0);
     }
-
+    
+    
     #center{
         margin-left: 1.5em;
     }

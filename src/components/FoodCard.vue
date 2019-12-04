@@ -1,13 +1,14 @@
 <template>
-  <section class="container">
+  <section class="">
     <div v-if="errorStr">
     Sorry, but the following error
     occurred: {{errorStr}}
   </div>
   <div v-if="!isHidden">
-    <button v-on:click="callApi" class="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded fixed--center">Let's Munch!</button>
-    <img v-bind:src="require('./layout/burgerLogo.png')" class="fixed fixed--center" style="height: 300px; width: 300px;"/>
-    <!-- <img v-bind:src="require('../assets/phone-gps.jpg')" class="fixed fixed--center" style="height: 400px; width: 200px;"/> -->
+    <button v-on:click="callApi" class="bg-orange-500 hover:bg-orange-700 text-white font-bold py-4 px-8 m-2 rounded text-2xl">Let's Munch!</button>
+    <div class="flex flex-row justify-center">
+    <img v-bind:src="require('../assets/phone_map.png')" class="py-2 px-4"/>
+    </div>
   </div>
   
   <div v-else>
@@ -50,6 +51,8 @@
         </div>
       </div>
     </div>
+      <button onclick="location.reload();" class="bg-orange-500 hover:bg-orange-700 text-white font-bold py-4 px-8 m-2 rounded text-2xl fixed fixed--center">Refresh</button>
+
     </div>
   </div>
   </section>
@@ -118,11 +121,20 @@ export default {
         latitude: this.location.coords.latitude,
         longitude: this.location.coords.longitude,
         radius: this.radius,
-     //   offset: Math.floor(Math.random() * 200) // psuedo random retrieval from yelp. Selects from a list of resstaurants at a specified index
+        open_now: true,
+       // offset: Math.floor(Math.random() * 200), // psuedo random retrieval from yelp. Selects from a list of resstaurants at a specified index
       }
     })
     .then((response) => {
       this.myJson = response.data;
+      //Shuffle the Json -- O(n)
+      var j, x, i;
+      for (i = this.myJson.businesses.length - 1; i > 0; i--) {
+          j = Math.floor(Math.random() * (i + 1));
+          x = this.myJson.businesses[i];
+          this.myJson.businesses[i] = this.myJson.businesses[j];
+          this.myJson.businesses[j] = x;
+      }
     })
     .catch((error) => {
       console.log(error)
@@ -132,8 +144,6 @@ export default {
     },
     right() {
       var url = 'http://maps.google.com/?q=';
-      var strLatitude = (this.current.coordinates.latitude.toString());
-      var strLongitude = (this.current.coordinates.longitude.toString());
       var address = (this.current.location.address1);
       window.open(url+address, "_blank");
       setTimeout(() => this.isVisible = false, 200)
@@ -214,4 +224,6 @@ export default {
     }
   }
 }
+
+
 </style>
