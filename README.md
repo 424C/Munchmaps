@@ -12,7 +12,7 @@ Munchmaps seeks to simplify the decision making process by removing unneccessary
 <img src="Documentation/basic_usage.jpg" width=250px>
 
 ## User Interface
-<img src="Documentation/layout.png" width=1000px>
+<img src="Documentation/layout1.png" width=1000px>
 
 1. **FOOD CARD**.
 
